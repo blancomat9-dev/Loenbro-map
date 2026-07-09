@@ -184,7 +184,7 @@
   <div class="hdiv"></div>
   <div class="apptitle">MISSION CRITICAL &nbsp;·&nbsp; PROJECT MAP</div>
   <div class="spacer"></div>
-  <div class="filestat" id="filestat"><span id="filesrc">Sample data loaded</span><br><b id="projcount"></b></div>
+  <div class="filestat" id="filestat"><span id="filesrc">No data loaded</span><br><b id="projcount"></b></div>
   <button class="import" id="importbtn">&#8682;&nbsp; Import Excel</button>
   <input type="file" id="fileinput" accept=".xlsx,.xls,.csv">
 </header>
@@ -519,25 +519,6 @@ function pinColor(p){return COLORBY==='svc'?dimColor(SVC_COLORS,p.svc):dimColor(
 let PROJECTS=[];
 let typeOn={}, svcOn={}, statusOn={'Upcoming':true,'Active':true,'Completed':true};
 
-const SAMPLE=[
- ['Project Longhorn - DFW Data Center','Critical Electrical','Data Center','Hyperscale','Dallas','TX',32.7767,-96.797,'2026-01-15','2027-06-30'],
- ['Project Bison - Hyperscale Campus','Critical Electrical','Data Center','Greenfield Campus','Cheyenne','WY',41.14,-104.8202,'2026-03-02','2027-09-30'],
- ['Project Aurora - AI Data Hall Fit-Out','Service & Maintenance','Data Center','AI Retrofit','Columbus','OH',39.9612,-82.9988,'2026-10-05','2027-11-19'],
- ['Project Evergreen - Membrane Water Plant','Mechanical & Structural','Water Treatment','Membrane','Moses Lake','WA',47.1301,-119.2781,'2026-02-09','2026-12-18'],
- ['Project Prairie - Wastewater Upgrade','Underground Installation','Water Treatment','Municipal Wastewater','Sioux Falls','SD',43.5446,-96.7311,'2026-04-13','2027-01-29'],
- ['Project Delta - Pump Station Rehab','Service & Maintenance','Water Treatment','Pump Station','Baton Rouge','LA',30.4515,-91.1871,'2026-01-12','2026-06-26'],
- ['Project Frost - Zyn Factory Expansion','Fabrication','Fabrication','Consumer Goods','Greeley','CO',40.4233,-104.7091,'2026-01-05','2026-11-25'],
- ['Project Summit - Cold Storage Warehouse','Mechanical & Structural','Warehouse','Cold Storage','Salt Lake City','UT',40.7608,-111.891,'2026-02-23','2026-06-19'],
- ['Project Rio - Chip Fab Mechanical Package','Mechanical & Structural','Fabrication','Semiconductor','Austin','TX',30.2672,-97.7431,'2026-08-03','2027-10-15'],
- ['Project Atomic - SMR Nuclear Support','Critical Electrical','Energy','Nuclear SMR','Idaho Falls','ID',43.4917,-112.0339,'2026-05-04','2027-12-17'],
- ['Project Cactus - Substation and Switchyard','Critical Electrical','Energy','Grid Substation','Tucson','AZ',32.2226,-110.9747,'2026-06-01','2027-03-31'],
- ['Project Ozark - Battery Gigafactory Electrical','Critical Electrical','Fabrication','Battery Gigafactory','Kansas City','MO',39.0997,-94.5786,'2026-09-14','2027-12-03'],
- ['Project Mesa - Solar and BESS Interconnect','Underground Installation','Energy','Solar + Storage','Albuquerque','NM',35.0844,-106.6504,'2026-03-16','2026-10-30'],
- ['Project Keystone - Compressor Station Skids','Fabrication','Energy','Midstream','Midland','TX',31.9973,-102.0779,'2026-05-18','2027-02-26'],
- ['Project Vault - Distribution Center','Mechanical & Structural','Warehouse','E-Commerce','Reno','NV',39.5296,-119.8138,'2026-11-02','2027-08-20']
-].map(r=>({name:r[0],svc:r[1],type:r[2],sub:r[3],city:r[4],state:r[5],lat:r[6],lon:r[7],
-  start:new Date(r[8]+'T00:00:00'),end:new Date(r[9]+'T00:00:00')}));
-
 function statusOf(p){
   const now=new Date();
   if(p.start && p.start>now) return 'Upcoming';
@@ -557,6 +538,7 @@ function renderChips(){
   Object.keys(svcOn).forEach(s=>{if(!svcs.includes(s))delete svcOn[s]});
 
   const tEl=document.getElementById('typechips'); tEl.innerHTML='';
+  if(!types.length) tEl.innerHTML='<div style="color:var(--muted);font-size:12px">Populates when an Excel is imported.</div>';
   types.forEach(t=>{
     const n=PROJECTS.filter(p=>String(p.type||'Other').trim()===t).length;
     const c=document.createElement('label');
@@ -566,6 +548,7 @@ function renderChips(){
     tEl.appendChild(c);
   });
   const sEl=document.getElementById('svcchips'); sEl.innerHTML='';
+  if(!svcs.length) sEl.innerHTML='<div style="color:var(--muted);font-size:12px">Populates when an Excel is imported.</div>';
   svcs.forEach(s=>{
     const n=PROJECTS.filter(p=>String(p.svc||'Other').trim()===s).length;
     const c=document.createElement('label');
@@ -769,7 +752,6 @@ function sizeMap(){
 window.addEventListener('resize',sizeMap);
 buildMap();
 initZoom();
-PROJECTS=SAMPLE;
 renderChips();
 renderPins();
 renderKindList();
