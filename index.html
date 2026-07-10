@@ -73,8 +73,8 @@
   .mapwrap{position:relative;overflow:hidden;margin:0 auto}
   svg.map{width:100%;height:auto;display:block;cursor:grab;touch-action:none}
   svg.map.dragging{cursor:grabbing}
-  .state{fill:#E9EDF2;stroke:rgba(27,74,126,.35);stroke-width:.8;vector-effect:non-scaling-stroke;transition:fill .15s}
-  .state:hover{fill:#DFE6EE}
+  .state{fill:#FBF6EA;stroke:rgba(169,50,38,.55);stroke-width:.8;vector-effect:non-scaling-stroke;transition:fill .15s}
+  .state:hover{fill:#F4EDDC}
 
   .zbtns{position:absolute;top:18px;right:18px;display:flex;flex-direction:column;gap:6px;z-index:15}
   .zbtns button{
@@ -152,11 +152,55 @@
   .hint{font-size:11.5px;color:var(--muted);padding:12px 4px 0;line-height:1.6}
   .hint code{background:var(--panel2);padding:1px 6px;border-radius:4px;font-size:11px}
 
+  button.mode{
+    width:38px;height:38px;border-radius:6px;border:1px solid var(--line);background:var(--panel);
+    color:var(--ink);font-size:16px;cursor:pointer;line-height:1;
+  }
+  button.mode:hover{background:var(--panel2)}
+
   @media (max-width:980px){
     .layout{flex-direction:column}
     aside.side{width:100%;flex-direction:row;flex-wrap:wrap}
     aside.side .sect{min-width:200px;flex:1}
   }
+
+  /* ---------- dark mode: the original v8 colorway ---------- */
+  html.dark{
+    --orange:#f05a28; --navy:#eef1f4; --bg:#191b1e; --panel:#222528; --panel2:#2a2e33;
+    --ink:#eef1f4; --muted:#9aa5b1; --line:#3a4046;
+  }
+  html.dark .polybg rect{fill:#17191c}
+  html.dark .polybg polygon{fill:#1e2125}
+  html.dark .polybg polygon:nth-of-type(2n){fill:#22262a}
+  html.dark .polybg polygon:nth-of-type(3n){fill:#1a1d20}
+  html.dark .polybg polygon:nth-of-type(5n){fill:#25282c}
+  html.dark header{background:rgba(20,22,24,.72)}
+  html.dark .brand .word{color:#fff}
+  html.dark aside.side{background:rgba(30,33,36,.72)}
+  html.dark .mapcard{background:rgba(30,33,36,.6)}
+  html.dark .state{fill:#26292d;stroke:rgba(247,138,90,.55)}
+  html.dark .state:hover{fill:#2e2a28}
+  html.dark .zbtns button{background:#26292d;border-color:#4a5158}
+  html.dark .zbtns button:hover{background:#31363b}
+  html.dark .vchip:hover{border-color:#556}
+  html.dark .off-hq{fill:#fff;stroke:#191b1e}
+  html.dark .off-fab{stroke:#191b1e}
+  html.dark .off-mfab{stroke:#fff}
+  html.dark .off-field{fill:#e07a5f;stroke:#191b1e}
+  html.dark .popup{background:#26292d;border-color:#4a5158;box-shadow:0 10px 30px rgba(0,0,0,.55)}
+  html.dark .popup .arrow{background:#26292d;border-right-color:#4a5158;border-bottom-color:#4a5158}
+  html.dark .popup .x:hover{color:#fff}
+  html.dark .popup h3{color:var(--ink)}
+  html.dark .mcbadge{background:rgba(240,90,40,.16);border-color:rgba(240,90,40,.55)}
+  html.dark .locbadge{background:rgba(125,185,255,.12);color:#7db9ff;border-color:rgba(125,185,255,.45)}
+  html.dark .st-Active{background:rgba(240,90,40,.18);color:#ff8a5e}
+  html.dark .st-Upcoming{background:rgba(77,163,255,.15);color:#7db9ff}
+  html.dark .st-Completed{background:rgba(120,200,120,.13);color:#8fd18f}
+  html.dark .otip{background:#26292d;border-color:#4a5158;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+  html.dark .otip b{color:#fff}
+  html.dark .toast{background:#26292d;border-color:#4a5158;box-shadow:0 8px 26px rgba(0,0,0,.5)}
+  html.dark .toast b{color:#fff}
+  html.dark .toast .errs{color:#ffb27d}
 </style>
 </head>
 <body>
@@ -191,6 +235,7 @@
   <div class="apptitle">MISSION CRITICAL &nbsp;·&nbsp; PROJECT MAP</div>
   <div class="spacer"></div>
   <div class="filestat" id="filestat"><span id="filesrc">No data loaded</span><br><b id="projcount"></b></div>
+  <button class="mode" id="modebtn" title="Switch light / dark">&#9790;</button>
   <button class="import" id="importbtn">&#8682;&nbsp; Import Excel</button>
   <input type="file" id="fileinput" accept=".xlsx,.xls,.csv">
 </header>
@@ -447,10 +492,10 @@ function starPath(R,r){
   return d+'Z';
 }
 function kindShapeSVG(k){ // small legend icon
-  if(k==='hq') return '<svg width="15" height="15" viewBox="-7.5 -7.5 15 15"><path d="'+starPath(6.5,2.8)+'" fill="#1B4A7E"/></svg>';
-  if(k==='mfab') return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><rect x="-4" y="-4" width="8" height="8" transform="rotate(45)" fill="#ffd23e" stroke="#1B4A7E" stroke-width="1"/></svg>';
-  if(k==='fab') return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><path d="'+starPath(5,2.2)+'" fill="#ffd23e" stroke="#1B4A7E" stroke-width=".6"/></svg>';
-  return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><circle r="3.2" fill="#C7442E"/></svg>';
+  if(k==='hq') return '<svg width="15" height="15" viewBox="-7.5 -7.5 15 15"><path d="'+starPath(6.5,2.8)+'" class="off-hq"/></svg>';
+  if(k==='mfab') return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><rect x="-4" y="-4" width="8" height="8" transform="rotate(45)" class="off-mfab"/></svg>';
+  if(k==='fab') return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><path d="'+starPath(5,2.2)+'" class="off-fab"/></svg>';
+  return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><circle r="3.2" class="off-field"/></svg>';
 }
 function drawOffices(){
   const g=window._gOffices; g.innerHTML='';
@@ -787,6 +832,15 @@ function toast(html,errs){
 }
 
 /* ---------------- controls + boot ---------------- */
+const modeBtn=document.getElementById('modebtn');
+function setMode(dark){
+  document.documentElement.classList.toggle('dark',dark);
+  modeBtn.innerHTML=dark?'&#9788;':'&#9790;';
+  try{localStorage.setItem('lbmap-dark',dark?'1':'0')}catch(_){/* file:// or blocked storage - theme just won't persist */}
+}
+modeBtn.onclick=()=>setMode(!document.documentElement.classList.contains('dark'));
+setMode((function(){try{return localStorage.getItem('lbmap-dark')==='1'}catch(_){return false}})());
+
 document.querySelectorAll('#colorseg button').forEach(b=>{
   b.onclick=()=>{
     COLORBY=b.dataset.v;
