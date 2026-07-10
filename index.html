@@ -6,8 +6,9 @@
 <title>Loenbro Project Map</title>
 <style>
   :root{
-    --orange:#f05a28; --bg:#191b1e; --panel:#222528; --panel2:#2a2e33;
-    --ink:#eef1f4; --muted:#9aa5b1; --line:#3a4046;
+    /* Loenbro corporate deck palette: navy wordmark, brick-red tagline, organic white ground */
+    --orange:#A93226; --navy:#1B4A7E; --bg:#FAF8F4; --panel:#FFFFFF; --panel2:#F1EEE8;
+    --ink:#1B4A7E; --muted:#5E7188; --line:#D9D4CB;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -17,12 +18,12 @@
 
   header{
     display:flex;align-items:center;gap:22px;flex-wrap:wrap;
-    padding:14px 26px;border-bottom:1px solid var(--line);
-    background:rgba(20,22,24,.72);backdrop-filter:blur(3px);
+    padding:14px 26px;border-bottom:3px solid var(--orange);
+    background:rgba(255,255,255,.92);backdrop-filter:blur(3px);
   }
   .brand{line-height:1}
-  .brand .word{font-weight:900;font-size:28px;letter-spacing:2px;color:#fff;font-family:"Arial Black","Segoe UI",sans-serif}
-  .brand .tag{font-size:10px;letter-spacing:4.2px;color:var(--orange);font-weight:600;margin-top:3px}
+  .brand .word{font-weight:900;font-size:28px;letter-spacing:2px;color:var(--navy);font-family:"Arial Black","Segoe UI",sans-serif}
+  .brand .tag{font-size:11px;letter-spacing:1.2px;color:var(--orange);font-weight:600;margin-top:3px}
   .hdiv{width:1px;height:38px;background:var(--line)}
   .apptitle{font-size:14px;letter-spacing:3px;color:var(--muted);font-weight:600}
   .spacer{flex:1}
@@ -31,14 +32,14 @@
   button.import{
     background:var(--orange);color:#fff;border:none;border-radius:6px;
     padding:10px 18px;font-size:13.5px;font-weight:700;cursor:pointer;letter-spacing:.5px;
-    box-shadow:0 2px 10px rgba(240,90,40,.35);
+    box-shadow:0 2px 10px rgba(169,50,38,.3);
   }
   button.import:hover{filter:brightness(1.1)}
   input[type=file]{display:none}
 
   .layout{display:flex;gap:16px;max-width:100%;margin:0 auto;padding:16px 22px 30px;align-items:flex-start}
   aside.side{
-    width:248px;flex:none;background:rgba(30,33,36,.72);border:1px solid var(--line);
+    width:248px;flex:none;background:var(--panel);border:1px solid var(--line);
     border-radius:12px;padding:14px 14px 16px;display:flex;flex-direction:column;gap:16px;
   }
   .sect .h{font-size:10.5px;letter-spacing:2px;color:var(--ink);font-weight:700;margin-bottom:2px}
@@ -51,7 +52,7 @@
   }
   .vchip .cnt{margin-left:auto;color:var(--muted);font-size:11.5px}
   .vchip.off{opacity:.32}
-  .vchip:hover{border-color:#556}
+  .vchip:hover{border-color:#A8BACC}
   .vchip .dot{width:10px;height:10px;border-radius:50%;flex:none}
   .hlist{display:flex;gap:6px;flex-wrap:wrap}
   .hchip{
@@ -68,24 +69,24 @@
   .seg button.on{background:var(--orange);color:#fff}
 
   .main{flex:1;min-width:0}
-  .mapcard{background:rgba(30,33,36,.6);border:1px solid var(--line);border-radius:12px;padding:10px;position:relative}
+  .mapcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;position:relative}
   .mapwrap{position:relative;overflow:hidden;margin:0 auto}
   svg.map{width:100%;height:auto;display:block;cursor:grab;touch-action:none}
   svg.map.dragging{cursor:grabbing}
-  .state{fill:#26292d;stroke:rgba(247,138,90,.55);stroke-width:.8;vector-effect:non-scaling-stroke;transition:fill .15s}
-  .state:hover{fill:#2e2a28}
+  .state{fill:#E9EDF2;stroke:rgba(27,74,126,.35);stroke-width:.8;vector-effect:non-scaling-stroke;transition:fill .15s}
+  .state:hover{fill:#DFE6EE}
 
   .zbtns{position:absolute;top:18px;right:18px;display:flex;flex-direction:column;gap:6px;z-index:15}
   .zbtns button{
-    width:34px;height:34px;border-radius:8px;border:1px solid #4a5158;background:#26292d;
+    width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;
     color:var(--ink);font-size:17px;font-weight:700;cursor:pointer;line-height:1;
   }
-  .zbtns button:hover{background:#31363b}
+  .zbtns button:hover{background:var(--panel2)}
 
-  .off-hq{fill:#ffffff;stroke:#191b1e;stroke-width:.8}
-  .off-fab{fill:#ffd23e;stroke:#191b1e;stroke-width:.6}
-  .off-mfab{fill:#ffd23e;stroke:#fff;stroke-width:.9}
-  .off-field{fill:#e07a5f;stroke:#191b1e;stroke-width:.5}
+  .off-hq{fill:#1B4A7E;stroke:#fff;stroke-width:.9}
+  .off-fab{fill:#ffd23e;stroke:#1B4A7E;stroke-width:.6}
+  .off-mfab{fill:#ffd23e;stroke:#1B4A7E;stroke-width:.9}
+  .off-field{fill:#C7442E;stroke:#fff;stroke-width:.5}
   .offmark{cursor:pointer}
 
   .pin{cursor:pointer}
@@ -98,22 +99,27 @@
 
   .popup{
     position:absolute;z-index:20;min-width:260px;max-width:320px;
-    background:#26292d;border:1px solid #4a5158;border-radius:10px;
-    box-shadow:0 10px 30px rgba(0,0,0,.55);padding:14px 16px 13px;
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    box-shadow:0 10px 30px rgba(27,74,126,.2);padding:14px 16px 13px;
     transform:translate(-50%,-100%);margin-top:-16px;pointer-events:none;
   }
   .popup.pinned{pointer-events:auto}
   .popup.below{transform:translate(-50%,0);margin-top:16px}
-  .popup .arrow{position:absolute;left:50%;bottom:-7px;width:12px;height:12px;background:#26292d;
-    border-right:1px solid #4a5158;border-bottom:1px solid #4a5158;transform:translateX(-50%) rotate(45deg)}
+  .popup .arrow{position:absolute;left:50%;bottom:-7px;width:12px;height:12px;background:#fff;
+    border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:translateX(-50%) rotate(45deg)}
   .popup.below .arrow{bottom:auto;top:-7px;transform:translateX(-50%) rotate(225deg)}
   .popup .x{position:absolute;top:6px;right:10px;cursor:pointer;color:var(--muted);font-size:16px;line-height:1;display:none}
   .popup.pinned .x{display:block}
-  .popup .x:hover{color:#fff}
-  .popup h3{margin:6px 26px 4px 0;font-size:15px;line-height:1.3}
+  .popup .x:hover{color:var(--orange)}
+  .popup h3{margin:6px 26px 4px 0;font-size:15px;line-height:1.3;color:var(--navy)}
   .mcbadge{
-    display:inline-block;background:rgba(240,90,40,.16);color:var(--orange);
-    border:1px solid rgba(240,90,40,.55);border-radius:4px;
+    display:inline-block;background:rgba(169,50,38,.1);color:var(--orange);
+    border:1px solid rgba(169,50,38,.45);border-radius:4px;
+    font-size:9.5px;font-weight:800;letter-spacing:2px;padding:2px 7px;
+  }
+  .locbadge{
+    display:inline-block;background:rgba(27,74,126,.08);color:var(--navy);
+    border:1px solid rgba(27,74,126,.4);border-radius:4px;
     font-size:9.5px;font-weight:800;letter-spacing:2px;padding:2px 7px;
   }
   .popup table{border-collapse:collapse;margin-top:8px;width:100%}
@@ -121,28 +127,28 @@
   .popup td:first-child{color:var(--muted);padding-right:14px;white-space:nowrap}
   .popup .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
   .statuspill{display:inline-block;border-radius:4px;padding:1px 8px;font-size:11px;font-weight:700}
-  .st-Active{background:rgba(240,90,40,.18);color:#ff8a5e}
-  .st-Upcoming{background:rgba(77,163,255,.15);color:#7db9ff}
-  .st-Completed{background:rgba(120,200,120,.13);color:#8fd18f}
+  .st-Active{background:rgba(169,50,38,.12);color:#A93226}
+  .st-Upcoming{background:rgba(27,74,126,.1);color:#1B4A7E}
+  .st-Completed{background:rgba(76,154,87,.14);color:#3E7F48}
 
   .otip{
-    position:absolute;z-index:18;background:#26292d;border:1px solid #4a5158;border-radius:8px;
-    padding:8px 12px;font-size:12px;box-shadow:0 6px 18px rgba(0,0,0,.5);
+    position:absolute;z-index:18;background:#fff;border:1px solid var(--line);border-radius:8px;
+    padding:8px 12px;font-size:12px;box-shadow:0 6px 18px rgba(27,74,126,.18);
     transform:translate(-50%,-100%);margin-top:-12px;pointer-events:none;display:none;line-height:1.5;
   }
-  .otip b{color:#fff}
+  .otip b{color:var(--navy)}
   .otip .k{color:var(--muted)}
 
   .legend2{display:flex;gap:18px;flex-wrap:wrap;align-items:center;padding:10px 4px 0;font-size:11.5px;color:var(--muted)}
   .legend2 .it{display:inline-flex;align-items:center;gap:6px}
 
   .toast{
-    position:fixed;right:22px;bottom:22px;z-index:50;background:#26292d;border:1px solid #4a5158;
+    position:fixed;right:22px;bottom:22px;z-index:50;background:#fff;border:1px solid var(--line);
     border-left:4px solid var(--orange);border-radius:8px;padding:13px 18px;max-width:400px;
-    box-shadow:0 8px 26px rgba(0,0,0,.5);font-size:13px;display:none;
+    box-shadow:0 8px 26px rgba(27,74,126,.22);font-size:13px;display:none;
   }
-  .toast b{color:#fff}
-  .toast .errs{margin:7px 0 0;padding-left:16px;color:#ffb27d;font-size:12px}
+  .toast b{color:var(--navy)}
+  .toast .errs{margin:7px 0 0;padding-left:16px;color:#A93226;font-size:12px}
   .hint{font-size:11.5px;color:var(--muted);padding:12px 4px 0;line-height:1.6}
   .hint code{background:var(--panel2);padding:1px 6px;border-radius:4px;font-size:11px}
 
@@ -156,30 +162,30 @@
 <body>
 
 <div class="polybg"><svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
-  <rect width="1920" height="1080" fill="#17191c"/>
-  <polygon points="0,0 640,0 300,420" fill="#1d2023"/>
-  <polygon points="640,0 300,420 900,300" fill="#212428"/>
-  <polygon points="640,0 1200,0 900,300" fill="#191c1f"/>
-  <polygon points="1200,0 1920,0 1560,260" fill="#22262a"/>
-  <polygon points="1200,0 900,300 1560,260" fill="#1b1e21"/>
-  <polygon points="1920,0 1920,540 1560,260" fill="#1e2125"/>
-  <polygon points="0,0 300,420 0,700" fill="#202327"/>
-  <polygon points="300,420 900,300 700,760" fill="#26292e"/>
-  <polygon points="0,700 300,420 700,760" fill="#1a1d20"/>
-  <polygon points="900,300 1560,260 1150,720" fill="#24272b"/>
-  <polygon points="1560,260 1920,540 1150,720" fill="#1c1f22"/>
-  <polygon points="0,700 700,760 350,1080" fill="#232629"/>
-  <polygon points="0,700 0,1080 350,1080" fill="#191b1e"/>
-  <polygon points="700,760 1150,720 900,1080" fill="#1e2124"/>
-  <polygon points="350,1080 700,760 900,1080" fill="#282b30"/>
-  <polygon points="1150,720 1920,540 1920,1080" fill="#212427"/>
-  <polygon points="900,1080 1150,720 1920,1080" fill="#1a1c1f"/>
+  <rect width="1920" height="1080" fill="#FAF8F4"/>
+  <polygon points="0,0 640,0 300,420" fill="#F7F4EF"/>
+  <polygon points="640,0 300,420 900,300" fill="#F4F1EB"/>
+  <polygon points="640,0 1200,0 900,300" fill="#FBF9F5"/>
+  <polygon points="1200,0 1920,0 1560,260" fill="#F5F2EC"/>
+  <polygon points="1200,0 900,300 1560,260" fill="#F9F6F1"/>
+  <polygon points="1920,0 1920,540 1560,260" fill="#F6F3ED"/>
+  <polygon points="0,0 300,420 0,700" fill="#F6F3EE"/>
+  <polygon points="300,420 900,300 700,760" fill="#F3EFE9"/>
+  <polygon points="0,700 300,420 700,760" fill="#F9F7F2"/>
+  <polygon points="900,300 1560,260 1150,720" fill="#F5F1EB"/>
+  <polygon points="1560,260 1920,540 1150,720" fill="#F8F5F0"/>
+  <polygon points="0,700 700,760 350,1080" fill="#F4F0EA"/>
+  <polygon points="0,700 0,1080 350,1080" fill="#FAF8F4"/>
+  <polygon points="700,760 1150,720 900,1080" fill="#F7F4EE"/>
+  <polygon points="350,1080 700,760 900,1080" fill="#F2EEE7"/>
+  <polygon points="1150,720 1920,540 1920,1080" fill="#F6F2EC"/>
+  <polygon points="900,1080 1150,720 1920,1080" fill="#F9F6F0"/>
 </svg></div>
 
 <header>
   <div class="brand">
     <div class="word">LOENBRO</div>
-    <div class="tag">LEADING THE CHANGE</div>
+    <div class="tag">One&nbsp;Partner&nbsp;|&nbsp;Limitless&nbsp;Solutions</div>
   </div>
   <div class="hdiv"></div>
   <div class="apptitle">MISSION CRITICAL &nbsp;·&nbsp; PROJECT MAP</div>
@@ -237,7 +243,7 @@
         <span class="it"><svg width="14" height="14"><circle cx="7" cy="7" r="5.5" fill="#666" stroke="#fff" stroke-width="1.5"/></svg> Active</span>
         <span class="it"><svg width="14" height="14"><circle cx="7" cy="7" r="5.5" fill="#666" fill-opacity=".85" stroke="#fff" stroke-width="1.5" stroke-dasharray="2.5 1.8"/></svg> Upcoming</span>
         <span class="it"><svg width="14" height="14" style="opacity:.45"><circle cx="7" cy="7" r="5.5" fill="#666" stroke="#fff" stroke-width="1.5"/></svg> Completed</span>
-        <span class="it" style="margin-left:16px">Hover any marker for info · click to keep it open · scroll to zoom · drag to pan</span>
+        <span class="it" style="margin-left:16px">Hover any marker for info · click markers to keep several open · click the map to clear · scroll to zoom · drag to pan</span>
       </div>
     </div>
     <div class="hint">
@@ -349,6 +355,7 @@ function applyZoom(){
   zoomg.setAttribute('transform','translate('+Z.tx+' '+Z.ty+') scale('+Z.k+')');
   MARKERS.forEach(m=>m.el.setAttribute('transform','translate('+m.x+' '+m.y+') scale('+(1/Z.k)+')'));
   hidePopup(true); hideOtip();
+  PINNEDS.forEach(positionPinned); // pinned popups follow their markers through zoom/pan
 }
 function clampZ(){
   Z.k=Math.min(10,Math.max(1,Z.k));
@@ -440,14 +447,15 @@ function starPath(R,r){
   return d+'Z';
 }
 function kindShapeSVG(k){ // small legend icon
-  if(k==='hq') return '<svg width="15" height="15" viewBox="-7.5 -7.5 15 15"><path d="'+starPath(6.5,2.8)+'" fill="#fff"/></svg>';
-  if(k==='mfab') return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><rect x="-4" y="-4" width="8" height="8" transform="rotate(45)" fill="#ffd23e" stroke="#fff" stroke-width="1"/></svg>';
-  if(k==='fab') return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><path d="'+starPath(5,2.2)+'" fill="#ffd23e"/></svg>';
-  return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><circle r="3.2" fill="#e07a5f"/></svg>';
+  if(k==='hq') return '<svg width="15" height="15" viewBox="-7.5 -7.5 15 15"><path d="'+starPath(6.5,2.8)+'" fill="#1B4A7E"/></svg>';
+  if(k==='mfab') return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><rect x="-4" y="-4" width="8" height="8" transform="rotate(45)" fill="#ffd23e" stroke="#1B4A7E" stroke-width="1"/></svg>';
+  if(k==='fab') return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><path d="'+starPath(5,2.2)+'" fill="#ffd23e" stroke="#1B4A7E" stroke-width=".6"/></svg>';
+  return '<svg width="13" height="13" viewBox="-6.5 -6.5 13 13"><circle r="3.2" fill="#C7442E"/></svg>';
 }
 function drawOffices(){
   const g=window._gOffices; g.innerHTML='';
   for(let i=MARKERS.length-1;i>=0;i--) if(MARKERS[i].kind==='office') MARKERS.splice(i,1);
+  PINNEDS.filter(q=>q.p._office).forEach(q=>unpinObj(q.p)); // office set changed - drop stale office popups
   OFFICES.forEach(o=>{
     if(!kindOn[o.k]) return;
     const [x,y]=xy(o.lon,o.lat);
@@ -461,8 +469,10 @@ function drawOffices(){
     else { el=mk('circle'); el.setAttribute('r',2.8); el.setAttribute('class','off-field'); }
     gp.appendChild(el);
     gp.setAttribute('transform','translate('+x+' '+y+') scale('+(1/Z.k)+')');
-    gp.addEventListener('mouseenter',()=>showOtip(o,x,y));
+    o._office=true; o._x=x; o._y=y;
+    gp.addEventListener('mouseenter',()=>{ if(!isPinnedObj(o)) showOtip(o,x,y); });
     gp.addEventListener('mouseleave',hideOtip);
+    gp.addEventListener('click',ev=>{ev.stopPropagation(); pinPopup(o);});
     MARKERS.push({el:gp,x:x,y:y,kind:'office'});
     g.appendChild(gp);
   });
@@ -490,12 +500,23 @@ function hideOtip(){document.getElementById('otip').style.display='none'}
 
 /* ---------------- categories + icons ---------------- */
 function normKey(s){return String(s==null?'':s).toLowerCase().replace(/[^a-z]/g,'')}
-const TYPE_COLORS={datacenter:'#4da3ff',fabrication:'#ffb02e',watertreatment:'#35c4bd',energy:'#f05a28',warehouse:'#b18cff'};
-const SVC_COLORS={criticalelectrical:'#f05a28',mechanicalstructural:'#4da3ff',undergroundinstallation:'#c98a4b',servicemaintenance:'#8fd18f',fabrication:'#ffd23e'};
-const FALLBACK=['#ff7ab2','#7de0ff','#d9c76a','#9aa5b1','#8fd18f'];
+/* canonical market keys: many Excel spellings map to one icon+color family */
+function canonKey(s){
+  const k=normKey(s);
+  if(k.includes('datacenter')) return 'datacenter';
+  if(k.includes('gov')||k.includes('defense')||k.includes('federal')) return 'government';
+  if(k.includes('water')||k.includes('wastewater')) return 'watertreatment';
+  if(k.includes('warehouse')||k.includes('distribution')) return 'warehouse';
+  if(k.includes('power')||k.includes('energy')||k.includes('utilit')) return 'energy';
+  return k;
+}
+/* colors from the corporate deck palette (steel blue, taupe, gold, brick, slate, teal) */
+const TYPE_COLORS={datacenter:'#6E8FBB',fabrication:'#9C8B7A',watertreatment:'#2E8C86',energy:'#B4574E',warehouse:'#D9A441',government:'#4A5568'};
+const SVC_COLORS={criticalelectrical:'#E04E20',mechanicalstructural:'#3D7EC8',undergroundinstallation:'#A97640',servicemaintenance:'#4C9A57',fabrication:'#D9A441'};
+const FALLBACK=['#C25B8A','#3F98B5','#B0972F','#6B7684','#4C9A57'];
 const _extra={};
 function dimColor(map,val){
-  const k=normKey(val||'Other');
+  const k=canonKey(val||'Other');
   if(map[k]) return map[k];
   if(_extra[k]) return _extra[k];
   return _extra[k]=FALLBACK[Object.keys(_extra).length%FALLBACK.length];
@@ -506,10 +527,11 @@ const ICONS={
   watertreatment:'M0,-5.6 C2.6,-2.2 4.2,-0.2 4.2,1.6 A4.2,4.4 0 1,1 -4.2,1.6 C-4.2,-0.2 -2.6,-2.2 0,-5.6 Z',
   fabrication:'M-5.4,5 L-5.4,-4.8 L-3,-4.8 L-3,-0.8 L0,-3 L0,-0.8 L3,-3 L3,-0.8 L5.4,-3 L5.4,5 Z',
   warehouse:'M-5.4,5 V-0.8 L0,-4.6 L5.4,-0.8 V5 H2.6 V0.6 H-2.6 V5 Z',
-  energy:'M1.6,-6 L-3.8,0.8 L-0.6,0.8 L-1.6,6 L3.8,-0.8 L0.6,-0.8 Z'
+  energy:'M1.6,-6 L-3.8,0.8 L-0.6,0.8 L-1.6,6 L3.8,-0.8 L0.6,-0.8 Z',
+  government:'M0,-5.4 L0.9,-4.5 L0.4,-4.1 L5.8,-2.6 L5.1,-1.3 L3.5,-1.5 L4.2,-0.1 L2.7,-0.4 L3.2,1.1 L1.0,0.2 L1.8,4.6 L0,3.2 L-1.8,4.6 L-1.0,0.2 L-3.2,1.1 L-2.7,-0.4 L-4.2,-0.1 L-3.5,-1.5 L-5.1,-1.3 L-5.8,-2.6 L-0.4,-4.1 L-0.9,-4.5 Z'
 };
 const ICON_DEFAULT='M-2.2,0 a2.2,2.2 0 1,0 4.4,0 a2.2,2.2 0 1,0 -4.4,0 Z';
-function iconOf(type){ return ICONS[normKey(type)]||ICON_DEFAULT; }
+function iconOf(type){ return ICONS[canonKey(type)]||ICON_DEFAULT; }
 function iconSVG(type,color){ // small sidebar icon: colored circle + white glyph
   return '<svg width="20" height="20" viewBox="-10 -10 20 20" style="flex:none"><circle r="8.6" fill="'+color+'"/><path d="'+iconOf(type)+'" fill="#fff" transform="scale(0.95)" fill-rule="evenodd"/></svg>';
 }
@@ -569,9 +591,33 @@ function renderChips(){
   const pc=document.getElementById('projcount');
   if(pc) pc.textContent=PROJECTS.length+' projects on map';
 }
-let PINNED=null;
+let PINNEDS=[]; // several popups can be pinned open at once; click the map to clear them
+function isPinnedObj(p){ return PINNEDS.some(q=>q.p===p); }
+function clearPins(){ PINNEDS.forEach(q=>q.el.remove()); PINNEDS=[]; }
+function unpinObj(p){
+  const i=PINNEDS.findIndex(q=>q.p===p);
+  if(i>=0){ PINNEDS[i].el.remove(); PINNEDS.splice(i,1); }
+}
+function positionPinned(q){
+  const sx=q.p._x*Z.k+Z.tx, sy=q.p._y*Z.k+Z.ty;
+  q.el.className='popup pinned'+(sy<200?' below':'');
+  q.el.style.left=(sx/VW*100)+'%';
+  q.el.style.top=(sy/VH*100)+'%';
+  q.el.style.display='block';
+}
+function pinPopup(p){
+  if(isPinnedObj(p)) return;
+  hidePopup(true); hideOtip();
+  const el=document.createElement('div');
+  el.innerHTML=popupHTML(p);
+  el.addEventListener('click',ev=>ev.stopPropagation());
+  el.querySelector('.x').onclick=()=>unpinObj(p);
+  document.getElementById('mapwrap').appendChild(el);
+  const q={p:p,el:el};
+  PINNEDS.push(q); positionPinned(q);
+}
 function renderPins(){
-  const g=window._gPins; g.innerHTML=''; PINNED=null; hidePopup(true);
+  const g=window._gPins; g.innerHTML=''; clearPins(); hidePopup(true);
   for(let i=MARKERS.length-1;i>=0;i--) if(MARKERS[i].kind==='pin') MARKERS.splice(i,1);
   PROJECTS.forEach(p=>{
     const t=String(p.type||'Other').trim(), sv=String(p.svc||'Other').trim(), st=statusOf(p);
@@ -588,18 +634,25 @@ function renderPins(){
     gl.setAttribute('transform','scale(0.85)');
     gp.appendChild(halo); gp.appendChild(c); gp.appendChild(gl);
     gp.setAttribute('transform','translate('+x+' '+y+') scale('+(1/Z.k)+')');
-    gp.addEventListener('mouseenter',()=>{ if(!PINNED) showPopup(p,false); });
-    gp.addEventListener('mouseleave',()=>{ if(!PINNED) hidePopup(true); });
-    gp.addEventListener('click',ev=>{ev.stopPropagation(); PINNED=p; showPopup(p,true);});
+    gp.addEventListener('mouseenter',()=>{ if(!isPinnedObj(p)) showPopup(p,false); });
+    gp.addEventListener('mouseleave',()=>{ hidePopup(true); });
+    gp.addEventListener('click',ev=>{ev.stopPropagation(); pinPopup(p);});
     MARKERS.push({el:gp,x:x,y:y,kind:'pin'});
     g.appendChild(gp);
   });
 }
-function showPopup(p,pinned){
-  hideOtip();
-  const pop=document.getElementById('popup');
+function popupHTML(p){
+  if(p._office){
+    return '<span class="x">&#10005;</span>'
+     +'<div class="locbadge">LOENBRO FACILITY</div>'
+     +'<h3>'+esc(p.n)+'</h3>'
+     +'<table>'
+     +'<tr><td>Kind</td><td>'+esc(KIND_META[p.k].label)+'</td></tr>'
+     +'<tr><td>Location</td><td>'+esc(p.c||'-')+'</td></tr>'
+     +'</table><div class="arrow"></div>';
+  }
   const st=statusOf(p), m=months(p);
-  pop.innerHTML='<span class="x" onclick="hidePopup()">&#10005;</span>'
+  return '<span class="x">&#10005;</span>'
    +'<div class="mcbadge">MISSION CRITICAL</div>'
    +'<h3>'+esc(p.name)+'</h3>'
    +'<table>'
@@ -612,20 +665,21 @@ function showPopup(p,pinned){
    +'<tr><td>Status</td><td><span class="statuspill st-'+st+'">'+st+'</span></td></tr>'
    +(p.extra||[]).map(x=>'<tr><td>'+esc(x[0])+'</td><td>'+esc(x[1])+'</td></tr>').join('')
    +'</table><div class="arrow"></div>';
+}
+function showPopup(p,pinned){
+  if(pinned){ pinPopup(p); return; }
+  hideOtip();
+  const pop=document.getElementById('popup');
+  pop.innerHTML=popupHTML(p);
   const sx=p._x*Z.k+Z.tx, sy=p._y*Z.k+Z.ty;
-  const below=sy<200;
-  pop.className='popup'+(below?' below':'')+(pinned?' pinned':'');
+  pop.className='popup'+(sy<200?' below':'');
   pop.style.left=(sx/VW*100)+'%';
   pop.style.top=(sy/VH*100)+'%';
   pop.style.display='block';
 }
-function hidePopup(force){
-  if(PINNED && !force && force!==undefined) return;
-  PINNED=null;
-  document.getElementById('popup').style.display='none';
-}
+function hidePopup(force){ document.getElementById('popup').style.display='none'; }
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-document.addEventListener('click',e=>{ if(!e.target.closest('.popup')) hidePopup(true); });
+document.addEventListener('click',e=>{ if(!e.target.closest('.popup')){ hidePopup(true); clearPins(); } });
 
 /* ---------------- Excel import (Projects + optional Locations sheet) ---------------- */
 const HEAD={
