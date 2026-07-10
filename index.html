@@ -69,12 +69,12 @@
   .seg button.on{background:var(--orange);color:#fff}
 
   .main{flex:1;min-width:0}
-  .mapcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;position:relative}
+  .mapcard{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px;position:relative}
   .mapwrap{position:relative;overflow:hidden;margin:0 auto}
   svg.map{width:100%;height:auto;display:block;cursor:grab;touch-action:none}
   svg.map.dragging{cursor:grabbing}
-  .state{fill:#FBF6EA;stroke:rgba(169,50,38,.55);stroke-width:.8;vector-effect:non-scaling-stroke;transition:fill .15s}
-  .state:hover{fill:#F4EDDC}
+  .state{fill:#E9EDF2;stroke:rgba(169,50,38,.55);stroke-width:.8;vector-effect:non-scaling-stroke;transition:fill .15s}
+  .state:hover{fill:#DFE6EE}
 
   .zbtns{position:absolute;top:18px;right:18px;display:flex;flex-direction:column;gap:6px;z-index:15}
   .zbtns button{
@@ -474,7 +474,20 @@ let OFFICES=[
  {n:'Fabrication',c:'Franklin, TN',k:'fab',lat:35.925,lon:-86.869},
  {n:'Field Office',c:'Salt Lake City, UT',k:'field',lat:40.760,lon:-111.891},
  {n:'Field Office',c:'Henderson, NV',k:'field',lat:36.040,lon:-114.982},
- {n:'Field Office',c:'Anaheim, CA',k:'field',lat:33.836,lon:-117.914}
+ {n:'Field Office',c:'Anaheim, CA',k:'field',lat:33.836,lon:-117.914},
+ {n:'Field Office',c:'Cheyenne, WY',k:'field',lat:41.140,lon:-104.820},
+ {n:'Field Office',c:'Bismarck, ND',k:'field',lat:46.808,lon:-100.784},
+ {n:'Field Office',c:'Colorado Springs, CO',k:'field',lat:38.834,lon:-104.821},
+ {n:'Field Office',c:'Pueblo, CO',k:'field',lat:38.254,lon:-104.609},
+ {n:'Field Office',c:'Westminster, CO',k:'field',lat:39.837,lon:-105.037},
+ {n:'Field Office',c:'Phoenix, AZ',k:'field',lat:33.460,lon:-112.050},
+ {n:'Field Office',c:'Tempe, AZ',k:'field',lat:33.415,lon:-111.909},
+ {n:'Field Office',c:'Lewiston, ID',k:'field',lat:46.417,lon:-117.018},
+ {n:'Field Office',c:'Bozeman, MT',k:'field',lat:45.677,lon:-111.043},
+ {n:'Field Office',c:'Rock Springs, WY',k:'field',lat:41.588,lon:-109.203},
+ {n:'Field Office',c:'Waco, TX',k:'field',lat:31.549,lon:-97.147},
+ {n:'Field Office',c:'Austin, TX',k:'field',lat:30.267,lon:-97.743},
+ {n:'Field Office',c:'San Marcos, TX',k:'field',lat:29.883,lon:-97.941}
 ];
 const KIND_META={
   hq:{label:'Headquarters'},
